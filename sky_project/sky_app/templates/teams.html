@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teams Page</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+    }
+
+    .navbar {
+      background-color: #005eb8;
+      color: white;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+      gap: 30px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .container {
+      padding: 30px;
+    }
+
+    .search-box {
+      margin: 20px 0;
+    }
+
+    .search-box input {
+      padding: 10px;
+      width: 250px;
+    }
+
+    .team-member {
+      display: flex;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      padding: 20px;
+      background: white;
+    }
+
+    .profile {
+      width: 150px;
+      height: 150px;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .info {
+      flex: 1;
+      padding: 0 20px;
+    }
+
+    .contact {
+      width: 200px;
+    }
+
+    .tasks {
+      margin-top: 10px;
+      background: #f1f1f1;
+      padding: 10px;
+    }
+
+    .graphs {
+      margin-top: 40px;
+      display: flex;
+      gap: 20px;
+    }
+
+    .graph-box {
+      width: 300px;
+      height: 200px;
+      background: #ddd;
+    }
+
+    .graph-info {
+      flex: 1;
+      background: #eee;
+      padding: 15px;
+    }
+
+    .actions button {
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: #005eb8;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <div style="font-size:22px; font-weight:bold;">sky</div>
+  <a href="/teams/">Teams</a>
+  <a href="/organisation/">Organisation</a>
+  <a href="/messages/">Messages</a>
+  <a href="/schedule/">Schedule</a>
+</div>
+
+<div class="container">
+
+  <h2>Department Name</h2>
+
+  <div class="search-box">
+    <input type="text" placeholder="Search teams or members">
+  </div>
+
+  {% for team in teams %}
+  <div class="team-member">
+    <div class="profile">Image</div>
+
+    <div class="info">
+      <h3>{{ team.team_name }}</h3>
+      <p>Team Leader: {{ team.team_leader }}</p>
+      <p>Role: {{ team.workstream }}</p>
+
+      <p><strong>Skills:</strong> {{ team.key_skills }}</p>
+
+      <p><strong>Upstream Dependencies:</strong> {{ team.dependency_type }}</p>
+      <p><strong>Downstream Dependencies:</strong> {{ team.downstream_dependencies }}</p>
+
+      <div class="tasks">
+        Focus: {{ team.development_focus }}
+      </div>
+
+      <div class="actions">
+        <a href="mailto:{{ team.team_leader }}@sky.com"><button>Email Team</button></a>
+        <button>Schedule Meeting</button>
+      </div>
+    </div>
+
+    <div class="contact">
+      <p>Contact Info:</p>
+      <p>{{ team.slack_channels }}</p>
+      <p><a href="{{ team.github }}" target="_blank">GitHub</a></p>
+      <p><a href="{{ team.jira_board_link }}" target="_blank">Jira Board</a></p>
+    </div>
+  </div>
+  {% endfor %}
+
+  <!-- GRAPHS SECTION -->
+  <div class="graphs">
+    <div class="graph-box"></div>
+
+    <div class="graph-info">
+      <h3>Task Information</h3>
+      <p>Completed, ongoing and pending tasks overview for the team.</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

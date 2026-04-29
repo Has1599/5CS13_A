@@ -61,3 +61,13 @@ def network_view(request):
     return render(request, 'organisation.html', {
         'teams_json': json.dumps(teams_data)
     })
+
+def teams(request):
+    query = request.GET.get('q')
+
+    if query and query.strip():
+        teams = XTVWeb.objects.filter(team_name__icontains=query)
+    else:
+        teams = XTVWeb.objects.all()
+
+    return render(request, 'teams.html', {'teams': teams})
