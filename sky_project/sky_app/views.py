@@ -1,6 +1,7 @@
 import json
 from django.shortcuts import render
 from .models import XTVWeb
+from django.http import JsonResponse
 
 COLOUR_MAP = {
     'infrastructure': '#8E44AD',
@@ -62,6 +63,13 @@ def network_view(request):
         'teams_json': json.dumps(teams_data)
     })
 
+
+
+def profile(request):
+    return render(request, 'profile.html', {
+        'user': request.user
+    })
+
 def teams(request):
     query = request.GET.get('q')
 
@@ -69,5 +77,26 @@ def teams(request):
         teams = XTVWeb.objects.filter(team_name__icontains=query)
     else:
         teams = XTVWeb.objects.all()
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+
+        data = []
+
+        for t in teams:
+
+            data.append({
+
+                'name': t.team_name,
+
+                'leader': t.team_leader,
+
+                'skills': t.key_skills,
+
+                'workstream': t.workstream,
+
+            })
+
+        return JsonResponse(data, safe=False)
+        
 
     return render(request, 'teams.html', {'teams': teams})

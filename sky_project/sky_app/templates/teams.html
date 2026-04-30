@@ -18,8 +18,19 @@
       height: 55px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       padding: 0 30px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
       gap: 30px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
     }
 
     .navbar a {
@@ -46,15 +57,6 @@
       margin-bottom: 20px;
       padding: 20px;
       background: white;
-    }
-
-    .profile {
-      width: 150px;
-      height: 150px;
-      background: #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .info {
@@ -105,24 +107,50 @@
 <body>
 
 <div class="navbar">
-  <div style="font-size:22px; font-weight:bold;">sky</div>
-  <a href="/teams/">Teams</a>
-  <a href="/organisation/">Organisation</a>
-  <a href="/messages/">Messages</a>
-  <a href="/schedule/">Schedule</a>
+
+  <div class="nav-left">
+    <div style="font-size:22px; font-weight:bold;">sky</div>
+    <a href="/teams/">Teams</a>
+    <a href="/organisation/">Organisation</a>
+    <a href="/messages/">Messages</a>
+    <a href="/schedule/">Schedule</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/profile/">Profile</a>
+  </div>
+
 </div>
+
 
 <div class="container">
 
   <h2>Department Name</h2>
 
   <div class="search-box">
-    <input type="text" placeholder="Search teams or members">
+    <form method="GET">
+      <input type="text" name="q" id="searchInput" placeholder="Search teams or members">
+    </form>
   </div>
+
+  <script>
+  const input = document.getElementById("searchInput");
+
+  input.addEventListener("input", function () {
+      fetch(`/teams/?q=${this.value}`, {
+          headers: {
+              'X-Requested-With': 'XMLHttpRequest'
+          }
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data); // (for now just logs results)
+      });
+  });
+  </script>
 
   {% for team in teams %}
   <div class="team-member">
-    <div class="profile">Image</div>
 
     <div class="info">
       <h3>{{ team.team_name }}</h3>
@@ -139,21 +167,20 @@
       </div>
 
       <div class="actions">
-        <a href="mailto:{{ team.team_leader }}@sky.com"><button>Email Team</button></a>
+        <a href="mailto:{{ team.team_leader }}@sky.com">
+          <button>Email Team</button>
+        </a>
         <button>Schedule Meeting</button>
       </div>
     </div>
 
     <div class="contact">
       <p>Contact Info:</p>
-      <p>{{ team.slack_channels }}</p>
-      <p><a href="{{ team.github }}" target="_blank">GitHub</a></p>
-      <p><a href="{{ team.jira_board_link }}" target="_blank">Jira Board</a></p>
     </div>
+
   </div>
   {% endfor %}
 
-  <!-- GRAPHS SECTION -->
   <div class="graphs">
     <div class="graph-box"></div>
 

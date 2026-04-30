@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #f4f6f8;
+    }
+
+    .navbar {
+      background: #005eb8;
+      color: white;
+      padding: 15px 30px;
+    }
+
+    .container {
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .profile-card {
+      background: white;
+      padding: 30px;
+      width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .profile-card h2 {
+      margin-bottom: 20px;
+    }
+
+    .profile-row {
+      margin: 10px 0;
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      padding: 10px;
+      background: #005eb8;
+      color: white;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="navbar">
+  sky
+</div>
+
+<div class="container">
+
+  <div class="profile-card">
+
+    <h2>My Profile</h2>
+
+    <div class="profile-row">
+      <strong>Username:</strong> {{ user.username }}
+    </div>
+
+    <div class="profile-row">
+      <strong>Email:</strong> {{ user.email }}
+    </div>
+
+    <div class="profile-row">
+      <strong>First Name:</strong> {{ user.first_name }}
+    </div>
+
+    <div class="profile-row">
+      <strong>Last Name:</strong> {{ user.last_name }}
+    </div>
+
+    <button class="back-btn" onclick="window.history.back()">
+      ← Back
+    </button>
+
+  </div>
+
+</div>
+
+</body>
+</html>
