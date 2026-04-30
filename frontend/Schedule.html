@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Schedule Page</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">sky</div>
+
+    <nav>
+      <a href="#">Dashboard</a>
+      <a href="#">Department View</a>
+      <a href="#">Team View</a>
+      <a href="#">Schedule</a>
+    </nav>
+  </header>
+
+  <main class="schedule-page">
+
+    <section class="schedule-header">
+      <div>
+        <h1>Schedule</h1>
+        <p>View meetings, events and team schedules.</p>
+      </div>
+
+      <button id="openModalBtn">+ Create Event</button>
+    </section>
+
+    <section class="schedule-layout">
+
+      <div class="calendar-card">
+        <h2>April 2026</h2>
+
+        <div class="calendar-grid calendar-days">
+          <div>Mon</div>
+          <div>Tue</div>
+          <div>Wed</div>
+          <div>Thu</div>
+          <div>Fri</div>
+          <div>Sat</div>
+          <div>Sun</div>
+        </div>
+
+        <div class="calendar-grid">
+          <div></div>
+          <div></div>
+          <div class="date">1</div>
+          <div class="date">2</div>
+          <div class="date">3</div>
+          <div class="date">4</div>
+          <div class="date">5</div>
+
+          <div class="date">6</div>
+          <div class="date">7</div>
+          <div class="date event-day">8<br><span>Team Sync</span></div>
+          <div class="date">9</div>
+          <div class="date event-day">10<br><span>Client Review</span></div>
+          <div class="date">11</div>
+          <div class="date">12</div>
+
+          <div class="date">13</div>
+          <div class="date event-day">14<br><span>Sprint Plan</span></div>
+          <div class="date">15</div>
+          <div class="date">16</div>
+          <div class="date">17</div>
+          <div class="date">18</div>
+          <div class="date">19</div>
+
+          <div class="date">20</div>
+          <div class="date">21</div>
+          <div class="date event-day">22<br><span>Progress Demo</span></div>
+          <div class="date">23</div>
+          <div class="date">24</div>
+          <div class="date">25</div>
+          <div class="date">26</div>
+
+          <div class="date">27</div>
+          <div class="date">28</div>
+          <div class="date">29</div>
+          <div class="date">30</div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+
+      <aside class="events-card">
+        <h2>Upcoming Events</h2>
+
+        <div class="event-item">
+          <h3>Team Sync Meeting</h3>
+          <p><strong>Date:</strong> 8 April 2026</p>
+          <p><strong>Time:</strong> 10:00 AM</p>
+          <p><strong>Platform:</strong> Microsoft Teams</p>
+          <p><strong>Team:</strong> Code Warriors</p>
+
+          <div class="notes">
+            <strong>Notes:</strong>
+            <p>Discuss weekly progress and blockers.</p>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <h3>Client Review</h3>
+          <p><strong>Date:</strong> 10 April 2026</p>
+          <p><strong>Time:</strong> 2:00 PM</p>
+          <p><strong>Platform:</strong> Zoom</p>
+          <p><strong>Team:</strong> Agile Avengers</p>
+
+          <div class="notes">
+            <strong>Notes:</strong>
+            <p>Review current dashboard prototype.</p>
+          </div>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Create Event Popup -->
+  <div class="modal" id="eventModal">
+    <div class="modal-content">
+      <span class="close" id="closeModalBtn">&times;</span>
+
+      <h2>Create New Event</h2>
+
+      <form>
+        <label>Event Title</label>
+        <input type="text" placeholder="e.g. Team Meeting">
+
+        <label>Date</label>
+        <input type="date">
+
+        <label>Time</label>
+        <input type="time">
+
+        <label>Platform</label>
+        <select>
+          <option>Microsoft Teams</option>
+          <option>Zoom</option>
+          <option>Google Meet</option>
+          <option>In Person</option>
+        </select>
+
+        <label>Team</label>
+        <select>
+          <option>Code Warriors</option>
+          <option>Agile Avengers</option>
+          <option>The Debuggers</option>
+        </select>
+
+        <label>Event Notes</label>
+        <textarea placeholder="Add notes for this event..."></textarea>
+
+        <button type="submit">Save Event</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("eventModal");
+    const openBtn = document.getElementById("openModalBtn");
+    const closeBtn = document.getElementById("closeModalBtn");
+
+    openBtn.onclick = function () {
+      modal.style.display = "flex";
+    }
+
+    closeBtn.onclick = function () {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>
